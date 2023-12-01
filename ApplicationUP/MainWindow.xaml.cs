@@ -24,5 +24,9 @@ namespace ApplicationUP
         {
             InitializeComponent();
         }
+
+        private void txt1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+        }
     }
 }
