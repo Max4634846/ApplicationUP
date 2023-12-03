@@ -3,28 +3,81 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ApplicationUP"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Login" Height="760" Width="1000" WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        AllowsTransparency="True"
+        WindowStyle="None" Icon="/image/IconCurort.png">
+
     <Window.Background>
-        <ImageBrush ImageSource="image/fonWpf.jpg"/>
+        <ImageBrush ImageSource="{Binding IsDarkTheme}"/>
     </Window.Background>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="250"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
+    <materialDesign:Card Margin="500,100,50,100" UniformCornerRadius="30">
+        <materialDesign:Card.Background>
+            <SolidColorBrush Color="Transparent"/>
+        </materialDesign:Card.Background>
+        <materialDesign:Card.RenderTransform>
+            <TranslateTransform X="-300"/>
+        </materialDesign:Card.RenderTransform>
 
-        <Border Grid.Column="1" BorderThickness="3" BorderBrush="White" CornerRadius="25" Width="300" Margin="25,117,25,-117">
-            <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" >
-                <TextBox  Name="txt1" Text="Login" Foreground="Gray" BorderBrush="LightBlue" BorderThickness="0,0,0,1" Grid.Row="1" Height="20" Margin="0,30" Width="230" TextChanged="txt1_TextChanged"/>
-                <TextBox  BorderBrush="LightBlue" BorderThickness="0,0,0,1" Grid.Row="2" Height="20" Text="Password" Foreground="Gray" Width="230">
-                </TextBox>
-                <Button BorderBrush="LightBlue"  Background="LightBlue" Foreground="White" FontSize="20" Grid.Row="3" Height="30" Width="100" Content="come" Margin="0,20"/>
+        <materialDesign:Card.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.0" To="1.0" Duration="0:0:3"/>
+                        <DoubleAnimation
+                                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                From="-300" To="0" Duration="0:0:1"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </materialDesign:Card.Triggers>
+        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost">
+
+            <StackPanel>
+                <materialDesign:PopupBox HorizontalAlignment="Right" Margin="0 20 20 0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Height="25">
+                    <StackPanel>
+
+                        <StackPanel Margin="16 10 0 6" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock  VerticalAlignment="Center" Text="Dark Mode" />
+                            <ToggleButton Cursor="Hand" ToolTip="Enable Dark Mode" Margin="12 0 8 0" x:Name="themeToggle" IsChecked="{Binding IsDarkTheme}" Click="toggleTheme"/>
+                        </StackPanel>
+
+                        <Button x:Name="Btn_Exit" ToolTip="Close Application" Content="Exit Application" Click="exit"/>
+
+                    </StackPanel>
+                </materialDesign:PopupBox>
+                <Image Margin="5 10 0 5" Source="/image/UseLogoOne.png" Height="80" Width="150" />
+                <TextBlock Margin="0 15 0 5" Text="Welcome, enter your login!" HorizontalAlignment="Center"  FontSize="25" 
+                           FontWeight="Bold"/>
+
+                <TextBox Margin="0 50 0 0" x:Name="txtUser" Width="300" FontSize="20"
+                         materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignTextBoxBase}"/>
+
+                <PasswordBox Margin="0 50 0 0" x:Name="txtPassword" Width="300" FontSize="20"
+                             materialDesign:HintAssist.Hint="Password"/>
+
+                <Button Margin="0 50 0 0" Width="200" Height="50" Content="Login" FontSize="20"/>
+
+                <Button Margin="0,10,0,0" x:Name="signupBtn" 
+                Style="{StaticResource MaterialDesignFlatButton}" 
+                Height="53" Width="130" materialDesign:ButtonAssist.CornerRadius="10"
+                FontSize="18" Content="Create Account">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <TextBlock Text="{TemplateBinding Content}" TextDecorations="Underline"
+                                Foreground="White" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </StackPanel>
-        </Border>
-    </Grid>
+
+        </materialDesign:DialogHost>
+    </materialDesign:Card>
+
 </Window>
