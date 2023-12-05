@@ -11,14 +11,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ApplicationUP
+namespace ApplicationUP.Views
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Логика взаимодействия для LoginForm.xaml
+    /// </summary>
+    public partial class LoginForm : Window
     {
-        public MainWindow()
+        public LoginForm()
         {
             InitializeComponent();
             var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwo.jpg", UriKind.Relative)));
@@ -65,4 +67,3 @@ namespace ApplicationUP
         }
     }
 }
-
