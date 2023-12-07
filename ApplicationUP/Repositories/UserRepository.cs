@@ -65,8 +65,6 @@ namespace ApplicationUP.Repositories
                             Id = reader[0].ToString(),
                             UserName = reader[1].ToString(),
                             Password = string.Empty,
-                            Name = reader[3].ToString(),
-                            LastName = reader[4].ToString(),
                             Email = reader[5].ToString(),
                         };
                     }

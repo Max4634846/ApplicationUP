@@ -20,6 +20,7 @@ namespace ApplicationUP.Views
     {
         public MainWindow()
         {
+            InitializeComponent();
         }
     }
 }

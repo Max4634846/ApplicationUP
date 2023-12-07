@@ -1,4 +1,5 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using ApplicationUP.Repositories;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,26 +17,18 @@ using System.Windows.Shapes;
 namespace ApplicationUP.Views
 {
     /// <summary>
-    /// Логика взаимодействия для LoginForm.xaml
+    /// Логика взаимодействия для SinqUp.xaml
     /// </summary>
-    public partial class LoginForm : Window
+    public partial class SinqUp : Window
     {
-        public LoginForm()
+        public SinqUp()
         {
             InitializeComponent();
             var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwo.jpg", UriKind.Relative)));
             this.Background = imageBrush;
         }
-
         public bool IsDarkTheme { get; set; }
         private readonly PaletteHelper paletteHelper = new PaletteHelper();
-
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
-        {
-            base.OnMouseLeftButtonDown(e);
-            DragMove();
-        }
-
         private void toggleTheme(object sender, RoutedEventArgs e)
         {
             ITheme theme = paletteHelper.GetTheme();
@@ -55,21 +48,18 @@ namespace ApplicationUP.Views
 
                 var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwoDark.jpg", UriKind.Relative)));
                 this.Background = imageBrush;
-
             }
 
             paletteHelper.SetTheme(theme);
         }
-
         private void exit(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-        private void signupBtn_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SinqUp sinqUp = new SinqUp();
-            sinqUp.Show();
+           
         }
     }
 }
