@@ -8,7 +8,7 @@
         Title="Application" Height="650" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Grid>
-        
+        <TextBlock Text="MainWindow - application" FontSize="25" FontWeight="Black"/>
     </Grid>
 
 </Window>

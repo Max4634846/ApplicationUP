@@ -8,43 +8,39 @@
         xmlns:viewModel="clr-namespace:ApplicationUP.ViewModels"
         xmlns:customcontrols="clr-namespace:ApplicationUP.CustomControls"
         mc:Ignorable="d"
-        Title="Login" Height="760" Width="1000" WindowStartupLocation="CenterScreen"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Title="Login" Height="760" Width="760" 
+        WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
-        WindowStyle="None" Icon="/image/IconCurort.png">
+        WindowStyle="None" 
+        Icon="/image/IconCurort.png">
     
     <Window.DataContext>
-        <viewModel:LoginViewModel/>
+        <viewModel:LoginViewModel />
     </Window.DataContext>
+    
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
     </Window.Resources>
+
+    <Window.Background>
+        <ImageBrush ImageSource="/image/FoneTwo.jpg"/>
+    </Window.Background>
+
     <Window.Visibility>
         <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
     </Window.Visibility>
 
-    <Grid Margin="500,100,50,100">
-        <Grid.Background>
-            <SolidColorBrush Color="Transparent"/>
-        </Grid.Background>
+    <Grid>
+        <Button  Margin="720,10,10,720" VerticalAlignment="Center" HorizontalAlignment="Center"  Click="Close_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Ellipse Width="30" Height="30" Fill="#5100" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Border Background="#5110" BorderBrush="AliceBlue" BorderThickness="3" CornerRadius="0,30,0,30" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="550">
 
-        <Grid.Triggers>
-            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation
-                                Storyboard.TargetProperty="Opacity"
-                                From="0.0" To="1.0" Duration="0:0:3"/>
-                        <DoubleAnimation
-                                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
-                                From="-300" To="0" Duration="0:0:1"/>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-        </Grid.Triggers>
-
-            <StackPanel Margin="0,0,0,-17">
-                <materialDesign:PopupBox HorizontalAlignment="Right" Margin="0 20 20 0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Height="25">
+                <StackPanel Margin="30">
                     <StackPanel>
 
                         <StackPanel Margin="16 10 0 6" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -52,28 +48,24 @@
                             <ToggleButton Cursor="Hand" ToolTip="Enable Dark Mode" Margin="12 0 8 0" x:Name="themeToggle" IsChecked="{Binding IsDarkTheme}" Click="toggleTheme"/>
                         </StackPanel>
 
-                        <Button x:Name="Btn_Exit" ToolTip="Close Application" Content="Exit Application" Click="exit"/>
 
                     </StackPanel>
-                </materialDesign:PopupBox>
-                <Image Margin="5 10 0 5" Source="/image/UseLogoOne.png" Height="80" Width="150" />
-                <TextBlock Margin="0 15 0 5" Text="Welcome, enter your login!" HorizontalAlignment="Center"  FontSize="25" 
+                    <Image Margin="5 10 0 5" Source="/image/UseLogoOne.png" Height="40" Width="40" />
+                    <TextBlock Margin="0 15 0 5" Text="Welcome" HorizontalAlignment="Center"  FontSize="25" 
                            FontWeight="Bold"/>
 
-                <TextBox Margin="0 50 0 0" x:Name="txtUser" Width="300" FontSize="20"
+                    <TextBox Margin="0 50 0 0" x:Name="txtUser" Width="300" FontSize="20"
                          materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignTextBoxBase}" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <customcontrols:BindablePasswordBox materialDesign:HintAssist.Hint="Password" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="{Binding ErrorMessage}" FontSize="25" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-                <Button Margin="0 50 0 0" Width="200" Height="50" Content="Sign In" FontSize="20" Command="{Binding LoginCommand}"/>
+                    <customcontrols:BindablePasswordBox materialDesign:HintAssist.Hint="Password" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="5" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300"/>
+                    <Button Margin="0 20 0 0" Width="200" Height="50" Content="Sign In" FontSize="20" Command="{Binding LoginCommand}"/>
 
-                <Button Margin="0,10,0,0" x:Name="signupBtn" 
-                Style="{StaticResource MaterialDesignFlatButton}"
-                Height="53" Width="130" materialDesign:ButtonAssist.CornerRadius="10"
-                FontSize="18" Content="Sign Up" Click="signupBtn_Click">
-                </Button>
-            </StackPanel>
+                    <Button Margin="0,10,0,0" x:Name="signupBtn" 
+                Style="{StaticResource MaterialDesignFlatButton}" Width="85" Content="Sign Up" Click="signupBtn_Click">
+                    </Button>
+                </StackPanel>
 
-    </Grid>
-    
+            </Border>
+        </Grid>
 </Window>

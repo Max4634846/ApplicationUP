@@ -1,11 +1,7 @@
-﻿using ApplicationUP.Repositories;
-using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,13 +15,14 @@ using System.Windows.Shapes;
 
 namespace ApplicationUP.Views
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Логика взаимодействия для RegisterForm.xaml
+    /// </summary>
+    public partial class RegisterForm : Page
     {
-        public MainWindow()
+        public RegisterForm()
         {
             InitializeComponent();
         }
-       
     }
 }
-

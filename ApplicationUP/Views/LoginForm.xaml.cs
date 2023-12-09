@@ -1,4 +1,6 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using ApplicationUP.Repositories;
+using ApplicationUP.ViewModels;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,8 +70,11 @@ namespace ApplicationUP.Views
 
         private void signupBtn_Click(object sender, RoutedEventArgs e)
         {
-            SinqUp sinqUp = new SinqUp();
-            sinqUp.Show();
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

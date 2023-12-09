@@ -1,5 +1,6 @@
 ﻿using ApplicationUP.Models;
 using ApplicationUP.Repositories;
+using ApplicationUP.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ApplicationUP.ViewModels
@@ -82,7 +84,10 @@ namespace ApplicationUP.ViewModels
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
-            if (string.IsNullOrWhiteSpace(UserName) || UserName.Length < 3 || Password == null || Password.Length < 3) validData = false;
+            if (string.IsNullOrWhiteSpace(UserName) || UserName.Length < 3 || Password == null || Password.Length < 3)
+            {
+                validData = false;
+            }
             else
                 validData = true;
             return validData;
@@ -93,9 +98,11 @@ namespace ApplicationUP.ViewModels
             var isValidUser = userRepository.AuthenticateUser(new System.Net.NetworkCredential(UserName, Password));
             if (isValidUser)
             {
-                Thread.CurrentPrincipal = new GenericPrincipal(
-                    new GenericIdentity(UserName), null);
-                IsViewVisible = false;
+                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), null);
+                MainWindow mainWindow = new MainWindow();
+                Application.Current.MainWindow.Close();
+                Application.Current.MainWindow = mainWindow;
+                mainWindow.Show();
             }
             else
             {
@@ -107,5 +114,6 @@ namespace ApplicationUP.ViewModels
         {
             throw new NotImplementedException();
         }
+
     }
 }
