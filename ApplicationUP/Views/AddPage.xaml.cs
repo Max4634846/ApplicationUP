@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ApplicationUP.Views
 {
     /// <summary>
-    /// Логика взаимодействия для RegisterForm.xaml
+    /// Логика взаимодействия для AddPage.xaml
     /// </summary>
-    public partial class RegisterForm : Page
+    public partial class AddPage : Page
     {
-        public RegisterForm()
+        public AddPage()
         {
             InitializeComponent();
         }

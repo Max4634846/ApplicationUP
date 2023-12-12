@@ -2,14 +2,246 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="BorderFormOne" TargetType="{x:Type Border}" >
-        <Setter Property="BorderThickness" Value="White"/>
+        <Setter Property="BorderThickness" Value="3" />
         <Setter Property="CornerRadius" Value="45"/>
     </Style>
+    
+    <Style x:Key="ErrorMessgaeTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground"  Value="#D7596D"/>
+        <Setter Property="Margin" Value="0 10 0 10"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+
+    </Style>
+
+    <Style x:Key="ButtonSinqIn" TargetType="{x:Type Button}">
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Content" Value="Sinq In"/>
+        <Setter Property="Background" Value="#8A16C1"/>
+        <Setter Property="Foreground"  Value="#fff"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="150"/>
+        
+    </Style>
+    
 
     <Style x:Key="ButtonSinqUp" TargetType="{x:Type Button}" >
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Height" Value="53"/>
         <Setter Property="Width" Value="130"/>
+    </Style>
+
+    <Style x:Key="txtUsername" TargetType="{x:Type TextBox}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff"/>
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 5 0 0"/>
+        <Setter Property="Padding" Value="20 0 0 0"/>
+    </Style>
+
+    
+    <SolidColorBrush x:Key="ColorUserName" Color="Transparent" Opacity="0.3" />
+    <Style x:Key="TextBoxStyleUserName" TargetType="{x:Type TextBox}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff"/>
+        <Setter Property="Background" Value="{StaticResource ColorUserName}"/>
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 5 0 0"/>
+        <Setter Property="Padding" Value="10 0 0 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border"
+                            CornerRadius="5"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer 
+                            x:Name="PART_ContentHost"
+                            Focusable="True"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#D1DF" TargetName="border" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="#D1DF" TargetName="border"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="ColorPassword" Color="Transparent" Opacity="0.3" />
+    <Style x:Key="PasswordBoxStyle" TargetType="{x:Type PasswordBox}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="#fff"/>
+        <Setter Property="Background" Value="{StaticResource ColorPassword}"/>
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 5 0 0"/>
+        <Setter Property="Padding" Value="10 0 0 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border x:Name="border"
+                        CornerRadius="5"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        SnapsToDevicePixels="True">
+                        <ScrollViewer 
+                        x:Name="PART_ContentHost"
+                        Focusable="True"
+                        HorizontalScrollBarVisibility="Hidden"
+                        VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#D1DF" TargetName="border" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="#D1DF" TargetName="border"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SquareCheckBoxStyle" TargetType="{x:Type CheckBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid>
+                        <!-- Ваш квадрат (можно заменить на кастомный графический ресурс) -->
+                        <Border x:Name="Square" Background="LightGray" Width="15" Height="15"/>
+                        <!-- Иконка (галочка) -->
+                        <Path x:Name="CheckMark" Stroke="White" StrokeThickness="2" Data="M1,1 L4,4 L9,1" Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Square" Property="Background" Value="DarkGray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type CheckBox}" x:Key="CheckBoxSwitch"> 
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <StackPanel>
+                        <Grid>
+                            <Border Width="45" Height="20" 
+                                    Background="#8320" 
+                                    CornerRadius="10"
+                                    Margin="5"/>
+                            
+                            <Border x:Name="btn"
+                                    Height="20"
+                                    Width="20"
+                                    CornerRadius="10"
+                                    HorizontalAlignment="Left"/>
+
+
+                        </Grid>
+                        <ContentPresenter x:Name="content"
+                                          Margin="10 0 0 0"
+                                          Content="{TemplateBinding Content}"
+                                          VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="right">
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                Storyboard.TargetName="btn"
+                                                Duration="0:0:0:4"
+                                                From="0 0 0 0"
+                                                To="28 0 0 0"
+                                                >
+                                <ThicknessAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut">
+                                        
+                                    </CircleEase>
+                                </ThicknessAnimation.EasingFunction>
+                                
+                            </ThicknessAnimation>
+                        </Storyboard>
+                        <Storyboard x:Key="left">
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                Storyboard.TargetName="btn"
+                                                Duration="0:0:0:4"
+                                                From="28 0 0 0"
+                                                To="0 0 0 0">   
+                                <ThicknessAnimation.EasingFunction>
+                                    <CircleEase EasingMode="EaseOut">
+
+                                    </CircleEase>
+                                </ThicknessAnimation.EasingFunction>
+
+                            </ThicknessAnimation>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Trigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="left">
+                                    
+                                </RemoveStoryboard>
+                                <BeginStoryboard Storyboard="{StaticResource right}" x:Name="rightt">
+                                    
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Setter TargetName="btn"
+                                    Property="Background"
+                                    Value="#fff9f4f4"
+                                    >
+                                
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="right">
+
+                                </RemoveStoryboard>
+                                <BeginStoryboard Storyboard="{StaticResource left}" x:Name="leftt">
+
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Setter TargetName="btn"
+                                    Property="Background"
+                                    Value="#ff060600">   
+
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

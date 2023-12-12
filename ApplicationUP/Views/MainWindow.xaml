@@ -5,10 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationUP"
         mc:Ignorable="d"
-        Title="Application" Height="650" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="Application" Height="650" Width="1000" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True">
 
     <Grid>
-        <TextBlock Text="MainWindow - application" FontSize="25" FontWeight="Black"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/image/FoneTwoDark.jpg" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border x:Name="PanelBorder" BorderThickness="0 0 3 0">
+            
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.5"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid Grid.Row="2" Opacity="0.70">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#282C31" Offset="0.2"/>
+                        <GradientStop Color="#8A2BE2" Offset="0.5"/>
+                        <GradientStop Color="#282C31" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <TextBlock x:Name="txtAdmin" Text="Admin"  Height="30" FontSize="25" FontWeight="Black"  HorizontalAlignment="Center" Foreground="#fff" Margin="5"/>
+            </Grid>
+        </Border>
+        
     </Grid>
 
 </Window>

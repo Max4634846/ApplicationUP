@@ -1,10 +1,8 @@
-﻿using ApplicationUP.Repositories;
+﻿using ApplicationUP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,14 +16,20 @@ using System.Windows.Shapes;
 
 namespace ApplicationUP.Views
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Логика взаимодействия для RegisterPage.xaml
+    /// </summary>
+    public partial class RegisterPage : Page
     {
-        public MainWindow()
+        public RegisterPage()
         {
             InitializeComponent();
-           
         }
-       
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new LoginPage());
+
+        }
     }
 }
-

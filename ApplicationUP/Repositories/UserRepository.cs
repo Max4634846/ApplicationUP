@@ -26,7 +26,7 @@ namespace ApplicationUP.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "select *from [User] where username=@username and [password]=@password";
+                command.CommandText = "select *from [Admin] where username=@username and [password]=@password";
                 command.Parameters.Add("@username", SqlDbType.NVarChar).Value = credential.UserName;
                 command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
                 validUser = command.ExecuteScalar() == null ? false : true;
@@ -54,7 +54,7 @@ namespace ApplicationUP.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "select *from [User] where username=@username";
+                command.CommandText = "select *from [Admin] where username=@username";
                 command.Parameters.Add("@username", SqlDbType.NVarChar).Value = username;
                 using (var reader = command.ExecuteReader())
                 {
@@ -71,6 +71,37 @@ namespace ApplicationUP.Repositories
                 }
             }
             return user;
+        }
+        public bool LoginExists(string login)
+        {
+        bool exists;
+        using (var connection = GetConnection())
+        using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "select *from [User] where username=@username";
+                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = login;
+
+                int count = (int)command.ExecuteScalar();
+                exists = count > 0;
+            }
+            return exists;
+        }
+
+        public void CreateUser(string login, string email)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "INSERT INTO [User] (username, email) " +
+                                      "VALUES (@username, @email)";
+                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = login;
+                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = email;
+                command.ExecuteNonQuery();
+            }
         }
         public void Remove(int id)
         {

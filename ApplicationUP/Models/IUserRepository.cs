@@ -11,6 +11,7 @@ namespace ApplicationUP.Models
     {
         bool AuthenticateUser(NetworkCredential credential);
         void Add(UserModel userModel);
+        //void CreateUser(string login, string email);
         void Edit(UserModel userModel);
         void Remove(int id);
         UserModel GetById(int id);

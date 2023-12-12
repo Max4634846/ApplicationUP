@@ -3,69 +3,51 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ApplicationUP.Views"
         xmlns:viewModel="clr-namespace:ApplicationUP.ViewModels"
-        xmlns:customcontrols="clr-namespace:ApplicationUP.CustomControls"
         mc:Ignorable="d"
-        Title="Login" Height="760" Width="760" 
+        Title="Login" Height="550" Width="800" 
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
         WindowStyle="None" 
         Icon="/image/IconCurort.png">
-    
-    <Window.DataContext>
-        <viewModel:LoginViewModel />
-    </Window.DataContext>
-    
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
-    </Window.Resources>
-
     <Window.Background>
-        <ImageBrush ImageSource="/image/FoneTwo.jpg"/>
+        <ImageBrush ImageSource="/image/FoneTwoDark.jpg" />
     </Window.Background>
-
-    <Window.Visibility>
-        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
-    </Window.Visibility>
-
     <Grid>
-        <Button  Margin="720,10,10,720" VerticalAlignment="Center" HorizontalAlignment="Center"  Click="Close_Click">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Ellipse Width="30" Height="30" Fill="#5100" />
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Border Background="#5110" BorderBrush="AliceBlue" BorderThickness="3" CornerRadius="0,30,0,30" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="550">
-
-                <StackPanel Margin="30">
-                    <StackPanel>
-
-                        <StackPanel Margin="16 10 0 6" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock  VerticalAlignment="Center" Text="Dark Mode" />
-                            <ToggleButton Cursor="Hand" ToolTip="Enable Dark Mode" Margin="12 0 8 0" x:Name="themeToggle" IsChecked="{Binding IsDarkTheme}" Click="toggleTheme"/>
-                        </StackPanel>
-
-
-                    </StackPanel>
-                    <Image Margin="5 10 0 5" Source="/image/UseLogoOne.png" Height="40" Width="40" />
-                    <TextBlock Margin="0 15 0 5" Text="Welcome" HorizontalAlignment="Center"  FontSize="25" 
-                           FontWeight="Bold"/>
-
-                    <TextBox Margin="0 50 0 0" x:Name="txtUser" Width="300" FontSize="20"
-                         materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignTextBoxBase}" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"/>
-
-                    <customcontrols:BindablePasswordBox materialDesign:HintAssist.Hint="Password" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="5" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300"/>
-                    <Button Margin="0 20 0 0" Width="200" Height="50" Content="Sign In" FontSize="20" Command="{Binding LoginCommand}"/>
-
-                    <Button Margin="0,10,0,0" x:Name="signupBtn" 
-                Style="{StaticResource MaterialDesignFlatButton}" Width="85" Content="Sign Up" Click="signupBtn_Click">
-                    </Button>
-                </StackPanel>
-
-            </Border>
+        <Grid VerticalAlignment="Top">
+            <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top" >
+                <Button Width="25" Height="25" Margin="5" Content="-" Foreground="White" Click="Minimize_Click">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                            <GradientStop Color="#5110" Offset="0"/>
+                            <GradientStop Color="#42aaff" Offset="1.5"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                
+                <!--<Button Width="25" Height="25" Margin="5" Content="-" Foreground="White" Click="Maximaze_Click">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                            <GradientStop Color="#5110" Offset="0"/>
+                            <GradientStop Color="#42aaff" Offset="1.5"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>-->
+                
+                <Button Width="25" Height="25" Margin="5" Content="X" Foreground="White" Click="Close_Click">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                            <GradientStop Color="#5110" Offset="0"/>
+                            <GradientStop Color="#8A16C1" Offset="1.5"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </DockPanel>
         </Grid>
+        <CheckBox x:Name="CheckBox" Margin="5,5,0,515"  HorizontalAlignment="Left" Background="#5410" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Style="{StaticResource CheckBoxSwitch}"/>
+
+        <Frame NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered" Name="MainFrame"/>
+    </Grid>
+
 </Window>
