@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
 
         <Border x:Name="PanelBorder" BorderThickness="0 0 3 0">
-            
+
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#462AD8" Offset="0"/>
@@ -43,7 +43,6 @@
                 <TextBlock x:Name="txtAdmin" Text="Admin"  Height="30" FontSize="25" FontWeight="Black"  HorizontalAlignment="Center" Foreground="#fff" Margin="5"/>
             </Grid>
         </Border>
-        
     </Grid>
 
 </Window>

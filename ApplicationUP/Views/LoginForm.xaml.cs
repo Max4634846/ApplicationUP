@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace ApplicationUP.Views
@@ -66,16 +67,18 @@ namespace ApplicationUP.Views
                 WindowState = WindowState.Normal;
             }
         }
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void SwitchToggle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (BtnToggle.Toggled1 == true)
+            {
                 var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwo.jpg", UriKind.Relative)));
                 this.Background = imageBrush;
-        }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwoDark.jpg", UriKind.Relative)));
-            this.Background = imageBrush;
+            }
+            else
+            {
+                var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwoDark.jpg", UriKind.Relative)));
+                this.Background = imageBrush;
+            }
         }
     }
 }
