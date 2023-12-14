@@ -24,6 +24,7 @@ namespace ApplicationUP.Views
         public RegisterPage()
         {
             InitializeComponent();
+            DataContext=new LoginViewModel();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

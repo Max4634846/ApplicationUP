@@ -3,6 +3,8 @@ using ApplicationUP.Repositories;
 using ApplicationUP.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Security;
 using System.Security.Principal;
@@ -18,11 +20,24 @@ namespace ApplicationUP.ViewModels
     {
         private string _userName;
         private string _email;
-        private SecureString _password;
+        private string _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
 
+        public UserRepository dbLog = new UserRepository();
+        private ObservableCollection<UserModel> users;
+
         private IUserRepository userRepository;
+
+        public ObservableCollection<UserModel> Users
+        {
+            get => users;
+            set
+            {
+                users = value;
+                OnPropertyChanged(nameof(Users));
+            }
+        }
         public string UserName
         {
             get
@@ -35,7 +50,7 @@ namespace ApplicationUP.ViewModels
                 OnPropertyChanged(nameof(UserName));
             }
         }
-        public SecureString Password
+        public string Password
         {
             get
             {
@@ -91,9 +106,10 @@ namespace ApplicationUP.ViewModels
 
         public LoginViewModel()
         {
+            Users = new ObservableCollection<UserModel>(dbLog.GetAllUsers());
             userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            //SignUpCommand = new ViewModelCommand(SignUp, CanSignUp);
+            SignUpCommand = new ViewModelCommand(SignUp, CanSignUp);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverCommand("", ""));
         }
         private bool CanExecuteLoginCommand(object obj)
@@ -124,16 +140,17 @@ namespace ApplicationUP.ViewModels
                 ErrorMessage = "* Invalid Password or Login";
             }
         }
-        //private bool CanSignUp(object parameter)
-        //{
-        //    return true;//!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(Email);
-        //}
-        //private void SignUp(object parameter)
-        //{
-        //    userRepository.CreateUser(UserName, Email);
-        //    string message = "Пользователь зарегистрирован. Войдите в аккаунт.";
-        //    MessageBox.Show(message);
-        //}
+
+        private bool CanSignUp(object parameter)
+        {
+            return true;//!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(Email);
+        }
+        private void SignUp(object parameter)
+        {
+            userRepository.CreateUser(UserName, Password, Email);
+            string message = "Пользователь зарегистрирован. Войдите в аккаунт.";
+            MessageBox.Show(message);
+        }
 
 
         private void ExecuteRecoverCommand(string username, string email)

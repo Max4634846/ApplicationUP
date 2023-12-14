@@ -24,9 +24,9 @@
     
     <Grid>
         <Border x:Name="RegisterBorder"
-            CornerRadius="0,30,0,30"                    
-            BorderThickness="2"
-            Opacity="0.95" Margin="250,40,250,40">
+                CornerRadius="0,30,0,30"                    
+                BorderThickness="2"
+                Opacity="0.95" Margin="250,40,250,40">
 
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -47,30 +47,33 @@
 
 
                 <StackPanel Width="220"
-                Grid.Row="1"
-                Orientation="Vertical"
-                Margin="0,35,0,0">
+                            Grid.Row="1"
+                            Orientation="Vertical"
+                            Margin="0,35,0,0">
 
-                    <Image Source="/image/addUser.png" Width="50" Height="50"/>
+                    <Image Source="/image/addUser.png" 
+                           Width="50" 
+                           Height="50"/>
+                    
                     <TextBlock Text="Register"
-                   Foreground="White"
-                   FontSize="25"
-                   FontWeight="Medium"
-                   FontFamily="Montserrat"
-                   HorizontalAlignment="Center"/>
+                               Foreground="White"
+                               FontSize="25"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               HorizontalAlignment="Center"/>
 
 
 
                     <TextBlock Text="Username"
-                   Foreground="DarkGray"
-                   FontSize="12"
-                   FontWeight="Medium"
-                   FontFamily="Montserrat"                             
-                   Margin="0,35,0,0"/>
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,35,0,0"/>
 
                     <TextBox x:Name="txtUser"
-                     Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource TextBoxStyleUserName}">
+                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource TextBoxStyleUserName}">
 
                         <TextBox.BorderBrush>
                             <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
@@ -80,15 +83,17 @@
                         </TextBox.BorderBrush>
 
                     </TextBox>
+                    
                     <TextBlock Text="Email"
-                   Foreground="DarkGray"
-                   FontSize="12"
-                   FontWeight="Medium"
-                   FontFamily="Montserrat"                             
-                   Margin="0,35,0,0"/>
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,35,0,0"/>
+                    
                     <TextBox x:Name="txtEmail"
-                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                     Style="{StaticResource TextBoxStyleUserName}">
+                             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource TextBoxStyleUserName}">
 
                         <TextBox.BorderBrush>
                             <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
@@ -100,20 +105,33 @@
                     </TextBox>
 
                     <TextBlock Text="Password"
-                   Foreground="DarkGray"
-                   FontSize="12"
-                   FontWeight="Medium"
-                   FontFamily="Montserrat"                             
-                   Margin="0,15,0,0"/>
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,15,0,0"/>
 
-                    <customcontrols:BindablePasswordBox Password="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="txtPassword"
+                    Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource TextBoxStyleUserName}"
+                    FontFamily="Wingdings">
+
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                                <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                <GradientStop Color="#8A16C1" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+
+                    </TextBox>
 
 
                     <TextBlock Text="{Binding ErrorMessage}"
-                       Style="{StaticResource ErrorMessgaeTextBlock}"/>
+                               Style="{StaticResource ErrorMessgaeTextBlock}"/>
 
-                    <Button x:Name="btnLogin" Content="Register" Style="{StaticResource ButtonSinqIn}" 
-                    Command="{Binding SignUpCommand}"/>
+                    <Button x:Name="btnLogin" Content="Register" 
+                            Style="{StaticResource ButtonSinqIn}" 
+                            Command="{Binding SignUpCommand}"/>
 
 
 

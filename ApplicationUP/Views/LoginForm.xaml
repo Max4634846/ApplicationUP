@@ -47,7 +47,7 @@
         </Grid>
         <local:SwitchToggle x:Name="BtnToggle"
                             Margin="5"
-                            Width="30" 
+                            Width="40" 
                             Height="30"
                             VerticalAlignment="Top" 
                             HorizontalAlignment="Left" 

@@ -23,9 +23,18 @@ namespace ApplicationUP.Views
         public MainWindow()
         {
             InitializeComponent();
-           
+            
         }
-       
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new HomePage();
+        }
     }
 }
 

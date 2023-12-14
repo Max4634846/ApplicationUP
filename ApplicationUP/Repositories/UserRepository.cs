@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security;
+using System.Dynamic;
 
 namespace ApplicationUP.Repositories
 {
@@ -26,7 +27,7 @@ namespace ApplicationUP.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "select *from [Admin] where username=@username and [password]=@password";
+                command.CommandText = "select *from [User] where username=@username and [password]=@password";
                 command.Parameters.Add("@username", SqlDbType.NVarChar).Value = credential.UserName;
                 command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
                 validUser = command.ExecuteScalar() == null ? false : true;
@@ -46,6 +47,7 @@ namespace ApplicationUP.Repositories
         {
             throw new NotImplementedException();
         }
+
         public UserModel GetByUsername(string username)
         {
             UserModel user = null;
@@ -54,7 +56,7 @@ namespace ApplicationUP.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "select *from [Admin] where username=@username";
+                command.CommandText = "select *from [User] where username=@username";
                 command.Parameters.Add("@username", SqlDbType.NVarChar).Value = username;
                 using (var reader = command.ExecuteReader())
                 {
@@ -72,6 +74,34 @@ namespace ApplicationUP.Repositories
             }
             return user;
         }
+
+        public List<UserModel> GetAllUsers()
+        {
+            List<UserModel> users = new List<UserModel>();
+
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand("select * from [User]", connection))
+            {
+                connection.Open();
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read()) 
+                    {
+                        var user = new UserModel
+                        {
+                            Id = Convert.ToInt32(reader["Id"]).ToString(),
+                            UserName = reader["Username"].ToString(),
+                            Password = reader["Password"].ToString(),
+                            Email = reader["Email"].ToString()
+                        };
+                        users.Add(user);
+                    }
+                }
+            }
+            return users;
+        }
+
         public bool LoginExists(string login)
         {
         bool exists;
@@ -80,7 +110,7 @@ namespace ApplicationUP.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "select *from [User] where username=@username";
+                command.CommandText = "select *from [User] where sername=@username";
                 command.Parameters.Add("@username", SqlDbType.NVarChar).Value = login;
 
                 int count = (int)command.ExecuteScalar();
@@ -89,16 +119,17 @@ namespace ApplicationUP.Repositories
             return exists;
         }
 
-        public void CreateUser(string login, string email)
+        public void CreateUser(string login, string password, string email)
         {
             using (var connection = GetConnection())
             using (var command = new SqlCommand())
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "INSERT INTO [User] (username, email) " +
-                                      "VALUES (@username, @email)";
+                command.CommandText = "insert into [User] (username, password, email) " +
+                                      "values (@username, @password, @email)";
                 command.Parameters.Add("@username", SqlDbType.NVarChar).Value = login;
+                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = password;
                 command.Parameters.Add("@email", SqlDbType.NVarChar).Value = email;
                 command.ExecuteNonQuery();
             }

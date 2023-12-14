@@ -63,6 +63,9 @@
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SwitchToggle.xaml.cs">
       <DependentUpon>SwitchToggle.xaml</DependentUpon>
     </Compile>
@@ -74,9 +77,6 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelCommand.cs" />
-    <Compile Include="Views\AddPage.xaml.cs">
-      <DependentUpon>AddPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -87,11 +87,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SwitchToggle.xaml">
+    <Page Include="Views\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddPage.xaml">
+    <Page Include="Views\StyleMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SwitchToggle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,7 +189,9 @@
   <ItemGroup>
     <Resource Include="image\addUser.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="image\Admin.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="image\trainMainLog.png" />
   </ItemGroup>
@@ -197,6 +203,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="image\icon-home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_admin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

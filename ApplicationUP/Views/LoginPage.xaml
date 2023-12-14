@@ -99,7 +99,20 @@
                     FontFamily="Montserrat"                             
                     Margin="0,15,0,0"/>
 
-                    <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <!--<customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                    <TextBox x:Name="txtPassword"
+                    Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource TextBoxStyleUserName}"
+                    FontFamily="Wingdings">
+
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                                <GradientStop Color="#DA34AE" Offset="0.75"/>
+                                <GradientStop Color="#8A16C1" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+
+                    </TextBox>
 
 
                     <TextBlock Text="{Binding ErrorMessage}"
