@@ -1,4 +1,5 @@
 ﻿using ApplicationUP.Repositories;
+using ApplicationUP.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,6 @@ namespace ApplicationUP.Views
         public MainWindow()
         {
             InitializeComponent();
-            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,6 +34,16 @@ namespace ApplicationUP.Views
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new HomePage();
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new AddPage();
+        }
+
+        private void Setting_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new SettingPage();
         }
     }
 }

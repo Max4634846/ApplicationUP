@@ -34,11 +34,26 @@ namespace ApplicationUP.Repositories
             }
             return validUser;
         }
-
-        public void Edit(UserModel userModel)
+        public void DeleteUser()
         {
-            throw new NotImplementedException();
+            
         }
+        public void EditUser(string newusername, string newpassword, string newemail, string newaccesslevel)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "UPDATE [User] SET password = @password, email = @email, accesslevel = @accesslevel where username = @username";
+                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = newusername;
+                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = newpassword;
+                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = newemail;
+                command.Parameters.Add("@accesslevel", SqlDbType.NVarChar).Value = newaccesslevel;
+                command.ExecuteNonQuery();
+            }
+        }
+
         public IEnumerable<UserModel> GetByAll()
         {
             throw new NotImplementedException();
@@ -67,7 +82,8 @@ namespace ApplicationUP.Repositories
                             Id = reader[0].ToString(),
                             UserName = reader[1].ToString(),
                             Password = string.Empty,
-                            Email = reader[5].ToString(),
+                            Email = reader[4].ToString(),
+                            AccessLevel = reader["AccessLevel"].ToString()
                         };
                     }
                 }
@@ -93,7 +109,8 @@ namespace ApplicationUP.Repositories
                             Id = Convert.ToInt32(reader["Id"]).ToString(),
                             UserName = reader["Username"].ToString(),
                             Password = reader["Password"].ToString(),
-                            Email = reader["Email"].ToString()
+                            Email = reader["Email"].ToString(),
+                            AccessLevel = reader["AccessLevel"].ToString()
                         };
                         users.Add(user);
                     }

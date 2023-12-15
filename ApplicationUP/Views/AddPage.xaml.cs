@@ -16,19 +16,13 @@ using System.Windows.Shapes;
 namespace ApplicationUP.Views
 {
     /// <summary>
-    /// Логика взаимодействия для HomePage.xaml
+    /// Логика взаимодействия для AddPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class AddPage : Page
     {
-        public HomePage()
+        public AddPage()
         {
             InitializeComponent();
-            
-        }
-
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new EditPage();
         }
     }
 }

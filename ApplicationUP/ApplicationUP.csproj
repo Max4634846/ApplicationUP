@@ -63,8 +63,17 @@
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddPage.xaml.cs">
+      <DependentUpon>AddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPage.xaml.cs">
+      <DependentUpon>EditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SwitchToggle.xaml.cs">
       <DependentUpon>SwitchToggle.xaml</DependentUpon>
@@ -87,7 +96,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StyleAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StyleDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,6 +244,39 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="image\icon_settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_edit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_edit2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_keyMini.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_addUser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_deleteUser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_AdmUs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\icon_UseAd.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

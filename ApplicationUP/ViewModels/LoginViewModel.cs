@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace ApplicationUP.ViewModels
 {
@@ -26,8 +27,32 @@ namespace ApplicationUP.ViewModels
 
         public UserRepository dbLog = new UserRepository();
         private ObservableCollection<UserModel> users;
+        private UserModel CurrentUser;
+        private Visibility _stackPanelVisibility = Visibility.Hidden;
 
         private IUserRepository userRepository;
+        private IUserRepository userEditor;
+
+        private string currentAccessLevel;
+        public Visibility StackPanelVisibility
+        {
+            get { return _stackPanelVisibility; }
+            set
+            {
+                _stackPanelVisibility = value;
+                OnPropertyChanged(nameof(StackPanelVisibility));
+            }
+        }
+        public string CurrentAccessLevel
+        {
+            get { return currentAccessLevel; }
+            set
+            {
+                currentAccessLevel = value;
+                VisibilityEdit();
+                OnPropertyChanged("CurrentAccessLevel");
+            }
+        }
 
         public ObservableCollection<UserModel> Users
         {
@@ -98,6 +123,11 @@ namespace ApplicationUP.ViewModels
                 OnPropertyChanged(nameof(IsViewVisible));
             }
         }
+
+        
+        
+        public ViewModelCommand AddCommand { get; private set; }
+        public ViewModelCommand EditCommand { get; private set; }
         public ViewModelCommand LoginCommand { get; private set; }
         public ViewModelCommand SignUpCommand { get; private set; }
         public ViewModelCommand RecoverPasswordCommand { get; private set; }
@@ -106,12 +136,31 @@ namespace ApplicationUP.ViewModels
 
         public LoginViewModel()
         {
+            VisibilityEdit();
+            EditCommand = new ViewModelCommand(Edit);
+            userEditor = new UserRepository();
             Users = new ObservableCollection<UserModel>(dbLog.GetAllUsers());
             userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             SignUpCommand = new ViewModelCommand(SignUp, CanSignUp);
+            AddCommand = new ViewModelCommand(AddUp, CanAdppUp);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverCommand("", ""));
         }
+        private void Edit(object parameter)
+        {
+            userEditor.EditUser(UserName, Password, Email, CurrentAccessLevel);
+            string message = "Пользователь был отредактирован.";
+            MessageBox.Show(message);
+        }
+
+        private void VisibilityEdit()
+        {
+            if (CurrentAccessLevel == "admin")
+            {
+                StackPanelVisibility = Visibility.Visible;
+            }
+        }
+           
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
@@ -129,6 +178,7 @@ namespace ApplicationUP.ViewModels
             var isValidUser = userRepository.AuthenticateUser(new System.Net.NetworkCredential(UserName, Password));
             if (isValidUser)
             {
+                CurrentUser = dbLog.GetByUsername(UserName);
                 Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), null);
                 MainWindow mainWindow = new MainWindow();
                 Application.Current.MainWindow.Close();
@@ -149,6 +199,17 @@ namespace ApplicationUP.ViewModels
         {
             userRepository.CreateUser(UserName, Password, Email);
             string message = "Пользователь зарегистрирован. Войдите в аккаунт.";
+            MessageBox.Show(message);
+        }
+
+        private bool CanAdppUp(object parameter)
+        {
+            return true;
+        }
+        private void AddUp(object parameter)
+        {
+            userRepository.CreateUser(UserName, Password, Email);
+            string message = "Admin добавил данные пользователя.";
             MessageBox.Show(message);
         }
 

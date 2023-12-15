@@ -6,6 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Views/StyleAdd.xaml"/>
+                <ResourceDictionary Source="/Views/StyleDataGrid.xaml"/>
                 <ResourceDictionary Source="/Views/StyleMenu.xaml" />
                 <ResourceDictionary Source="/Views/Design.xaml"/>
             </ResourceDictionary.MergedDictionaries>

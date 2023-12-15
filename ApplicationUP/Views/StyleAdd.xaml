@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+ 
+    <Style TargetType="TextBlock" x:Key="addTextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="70 0" />
+        <Setter Property="Foreground" Value="AliceBlue" />
+        <Setter Property="FontSize" Value="26" />
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="addTextBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Width" Value="100" />
+        <Setter Property="BorderBrush" Value="#8a1dc1" />
+        <Setter Property="BorderThickness" Value="0 0 0 2" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="AliceBlue" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="Add">
+        <Setter Property="Width" Value="250" />
+        <Setter Property="Height" Value="45" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderThickness="2" Background="#8a1dc1" CornerRadius="15 0 15 0">
+                        <TextBlock Text="Add" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock.Effect>
+                                <DropShadowEffect ShadowDepth="1" Color="Black"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+</ResourceDictionary>

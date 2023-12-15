@@ -26,15 +26,6 @@
                     </Button.Background>
                 </Button>
 
-                <!--<Button Width="25" Height="25" Margin="5" Content="-" Foreground="White" Click="Maximaze_Click">
-                    <Button.Background>
-                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                            <GradientStop Color="#5110" Offset="0"/>
-                            <GradientStop Color="#42aaff" Offset="1.5"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>-->
-
                 <Button Width="25" Height="25" Margin="5" Content="X" Foreground="White" Click="Close_Click">
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
