@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ApplicationUP.Views
 {
@@ -28,14 +31,17 @@ namespace ApplicationUP.Views
         {
             if (BtnToggle.Toggled1 == true)
             {
-                var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwo.jpg", UriKind.Relative)));
-                this.Background = imageBrush;
+                ResourceDictionary dark = new ResourceDictionary();
+                dark.Source = new Uri("Dark.xaml", UriKind.Relative);
+                System.Windows.Application.Current.Resources.MergedDictionaries.Add(dark);
             }
             else
             {
-                var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwoDark.jpg", UriKind.Relative)));
-                this.Background = imageBrush;
+                ResourceDictionary Light = new ResourceDictionary();
+                Light.Source = new Uri("Light.xaml", UriKind.Relative);
+                System.Windows.Application.Current.Resources.MergedDictionaries.Add(Light);
             }
         }
+      
     }
 }

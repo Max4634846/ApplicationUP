@@ -8,6 +8,7 @@
       xmlns:customcontrols="clr-namespace:ApplicationUP.CustomControls"
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="800"
+      MinWidth="800" MaxWidth="800" MinHeight="550" MaxHeight="550"
       Title="LoginPage">
 
     <Page.DataContext>
@@ -26,8 +27,7 @@
         <Border x:Name="LoginBorder"
             CornerRadius="0,30,0,30"                    
             BorderThickness="2"
-            Opacity="0.95" Margin="250,40,250,40"
-            >
+            Opacity="0.95" Margin="250,40,250,40">
 
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -52,10 +52,11 @@
                  Orientation="Vertical"
                  Margin="0,35,0,0">
 
-                    <Image Source="/Image/trainMainLog.png"
+                    <Image x:Name="IconTravel" Source="/Image/trainMainLog.png"
                 Width="100" Height="100"/>
 
-                    <TextBlock Text="Travel the world"
+                    <TextBlock x:Name="Travel"
+                    Text="Travel the world"
                     Foreground="White"
                     FontSize="25"
                     FontWeight="Medium"
@@ -98,8 +99,7 @@
                     FontWeight="Medium"
                     FontFamily="Montserrat"                             
                     Margin="0,15,0,0"/>
-
-                    <!--<customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                    
                     <TextBox x:Name="txtPassword"
                     Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
                     Style="{StaticResource TextBoxStyleUserName}"

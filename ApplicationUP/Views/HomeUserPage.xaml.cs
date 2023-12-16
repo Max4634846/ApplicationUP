@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,19 +16,13 @@ using System.Windows.Shapes;
 namespace ApplicationUP.Views
 {
     /// <summary>
-    /// Логика взаимодействия для EditPage.xaml
+    /// Логика взаимодействия для HomeUserPage.xaml
     /// </summary>
-    public partial class EditPage : Page
+    public partial class HomeUserPage : Page
     {
-        private HomePage homePage;
-        public EditPage()
+        public HomeUserPage()
         {
             InitializeComponent();
-        }
-
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(homePage);
         }
     }
 }

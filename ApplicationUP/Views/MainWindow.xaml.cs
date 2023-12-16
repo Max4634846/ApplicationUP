@@ -2,6 +2,7 @@
 using ApplicationUP.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -21,11 +22,21 @@ namespace ApplicationUP.Views
 {
     public partial class MainWindow : Window
     {
+        public static MainWindow mainWindow;
         public MainWindow()
         {
             InitializeComponent();
+            mainWindow = this;
         }
-
+        public void ChangePageTextColor(Color color)
+        {
+            //Travel.Foreground = new SolidColorBrush(color);
+        }
+        public void ChangeImage(Uri newImageUri)
+        {
+            var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwo.jpg", UriKind.Relative)));
+            this.Background = imageBrush;
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -44,6 +55,17 @@ namespace ApplicationUP.Views
         private void Setting_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new SettingPage();
+        }
+        private void Expand_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else
+            {
+                WindowState = WindowState.Normal;
+            }
         }
     }
 }

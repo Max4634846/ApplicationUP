@@ -9,15 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security;
 using System.Dynamic;
+using System.Windows.Input;
 
 namespace ApplicationUP.Repositories
 {
     public class UserRepository : RepositoryBase, IUserRepository
     {
-        public void Add(UserModel userModel)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool AuthenticateUser(NetworkCredential credential)
         {
@@ -27,16 +24,33 @@ namespace ApplicationUP.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "select *from [User] where username=@username and [password]=@password";
+                command.CommandText = "select *from [UsersTrain] where username=@username and [password]=@password";
                 command.Parameters.Add("@username", SqlDbType.NVarChar).Value = credential.UserName;
                 command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
                 validUser = command.ExecuteScalar() == null ? false : true;
             }
             return validUser;
         }
-        public void DeleteUser()
+        public void DeleteUsername(int userId)
         {
-            
+            SqlConnection connection = new SqlConnection("Data Source=ONLYUP;Initial Catalog=MVVMLoginDb;Integrated Security=True");
+            string cmd = "DELETE FROM [UsersTrain] WHERE Id = @Id";
+            SqlCommand deleteCommand = new SqlCommand(cmd, connection);
+            deleteCommand.Parameters.AddWithValue("@Id", userId);
+
+            try
+            {
+                connection.Open();
+                deleteCommand.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
         public void EditUser(string newusername, string newpassword, string newemail, string newaccesslevel)
         {
@@ -45,11 +59,11 @@ namespace ApplicationUP.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "UPDATE [User] SET password = @password, email = @email, accesslevel = @accesslevel where username = @username";
-                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = newusername;
-                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = newpassword;
-                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = newemail;
-                command.Parameters.Add("@accesslevel", SqlDbType.NVarChar).Value = newaccesslevel;
+                command.CommandText = "UPDATE [UsersTrain] SET Password = @Password, Email = @Email, AccessLevel = @AccessLevel where Username = @Username";
+                command.Parameters.Add("@Username", SqlDbType.NVarChar).Value = newusername;
+                command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = newpassword;
+                command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = newemail;
+                command.Parameters.Add("@AccessLevel", SqlDbType.NVarChar).Value = newaccesslevel;
                 command.ExecuteNonQuery();
             }
         }
@@ -71,7 +85,7 @@ namespace ApplicationUP.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "select *from [User] where username=@username";
+                command.CommandText = "select *from [UsersTrain] where username=@username";
                 command.Parameters.Add("@username", SqlDbType.NVarChar).Value = username;
                 using (var reader = command.ExecuteReader())
                 {
@@ -82,7 +96,7 @@ namespace ApplicationUP.Repositories
                             Id = reader[0].ToString(),
                             UserName = reader[1].ToString(),
                             Password = string.Empty,
-                            Email = reader[4].ToString(),
+                            Email = reader[3].ToString(),
                             AccessLevel = reader["AccessLevel"].ToString()
                         };
                     }
@@ -96,7 +110,7 @@ namespace ApplicationUP.Repositories
             List<UserModel> users = new List<UserModel>();
 
             using (var connection = GetConnection())
-            using (var command = new SqlCommand("select * from [User]", connection))
+            using (var command = new SqlCommand("select * from [UsersTrain]", connection))
             {
                 connection.Open();
 
@@ -119,23 +133,6 @@ namespace ApplicationUP.Repositories
             return users;
         }
 
-        public bool LoginExists(string login)
-        {
-        bool exists;
-        using (var connection = GetConnection())
-        using (var command = new SqlCommand())
-            {
-                connection.Open();
-                command.Connection = connection;
-                command.CommandText = "select *from [User] where sername=@username";
-                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = login;
-
-                int count = (int)command.ExecuteScalar();
-                exists = count > 0;
-            }
-            return exists;
-        }
-
         public void CreateUser(string login, string password, string email)
         {
             using (var connection = GetConnection())
@@ -143,11 +140,27 @@ namespace ApplicationUP.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "insert into [User] (username, password, email) " +
-                                      "values (@username, @password, @email)";
-                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = login;
-                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = password;
-                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = email;
+                command.CommandText = "insert into [UsersTrain] (Username , Password, Email) " +
+                                      "values (@Username, @Password, @Email)";
+                command.Parameters.Add("@Username", SqlDbType.NVarChar).Value = login;
+                command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = password;
+                command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = email;
+                command.ExecuteNonQuery();
+            }
+        }
+        public void Add(string login, string password, string email, string accesslevel)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "insert into [UsersTrain] (Username , Password, Email, AccessLevel) " +
+                                      "values (@Username, @Password, @Email, @AccessLevel)";
+                command.Parameters.Add("@Username", SqlDbType.NVarChar).Value = login;
+                command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = password;
+                command.Parameters.Add("@Email", SqlDbType.NVarChar).Value = email;
+                command.Parameters.Add("@AccessLevel", SqlDbType.NVarChar).Value = accesslevel;
                 command.ExecuteNonQuery();
             }
         }

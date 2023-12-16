@@ -7,6 +7,7 @@
       xmlns:viewModel="clr-namespace:ApplicationUP.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      MaxHeight="550" MaxWidth="800"
       Title="EditPage">
 
     <Page.DataContext>
@@ -21,7 +22,7 @@
         <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
     </Page.Visibility>
 
-    <Border BorderThickness="2" Opacity="0.98" CornerRadius="50 0 50 0" Margin="50 100 50 100">
+    <Border BorderThickness="2" Opacity="0.999" CornerRadius="50 0 50 0" Margin="50 100 50 100">
         <Border.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                 <GradientStop Color="#5110" Offset="0"/>
@@ -55,14 +56,16 @@
             <Image Grid.Row="1" Source="/image/icon_addUser.png" Width="40" Height="40"/>
             <Image Grid.Row="2" Source="/image/icon_email.png" Width="40" Height="40"/>
             <Image Grid.Row="3" Source="/image/icon_key.png" Width="40" Height="40"/>
-            <Image Grid.Row="4" Source="/image/icon_addUser.png" Width="40" Height="40"/>
+            <Image Grid.Row="4" Source="/image/admin.png" Width="40" Height="40"/>
 
             <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" BorderBrush="#8a1dc1" Width="250" Style="{StaticResource TextBoxStyleUserName}" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Grid.Row="2" HorizontalAlignment="Left" Grid.Column="1"  Width="250" BorderBrush="#8a1dc1" Style="{StaticResource TextBoxStyleUserName}" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Grid.Row="3" HorizontalAlignment="Left" Grid.Column="1" Width="250"  BorderBrush="#8a1dc1" Style="{StaticResource TextBoxStyleUserName}" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox Grid.Row="4" HorizontalAlignment="Left" Grid.Column="1" Width="250"  BorderBrush="#8a1dc1" Style="{StaticResource TextBoxStyleUserName}" Text="{Binding CurrentAccessLevel, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Button Grid.Row="5" HorizontalAlignment="Left" Grid.Column="1" Style="{StaticResource Add}" Command="{Binding EditCommand}"/>
+            <Button Grid.Row="5" HorizontalAlignment="Left" Grid.Column="1" Style="{StaticResource Add}" Command="{Binding EditCommand}" Click="Edit_Click"/>
+
+            <Frame  x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Border>
 </Page>

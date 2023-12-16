@@ -24,6 +24,14 @@ namespace ApplicationUP.Views
         {
             InitializeComponent();
         }
+        public void ChangePageTextColor(Color color)
+        {
+            Travel.Foreground = new SolidColorBrush(color);
+        }
+        public void ChangeImage(Uri newImageUri)
+        {
+            IconTravel.Source = new BitmapImage(newImageUri);
+        }
 
         private void SinqUp_Click(object sender, RoutedEventArgs e)
         {

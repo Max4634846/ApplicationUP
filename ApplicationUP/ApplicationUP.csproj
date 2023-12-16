@@ -72,6 +72,9 @@
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\HomeUserPage.xaml.cs">
+      <DependentUpon>HomeUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,9 @@
     <Compile Include="Views\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserWin.xaml.cs">
+      <DependentUpon>UserWin.xaml</DependentUpon>
+    </Compile>
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,11 +106,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HomeUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Light.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +177,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Tems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -188,16 +214,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="image\fonWpf.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="key.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="account.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="image\FoneOne.jpg" />
     <Resource Include="image\FoneTwo.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -205,12 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="image\FoneTwoDark.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="image\Tickets.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="image\UseLogoOne.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="image\keyUser.png" />
@@ -225,15 +235,6 @@
     <Resource Include="image\trainMainLog.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="image\user-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="image\profile.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="image\icon-home.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="image\icon_exit.png" />
   </ItemGroup>
   <ItemGroup>
@@ -246,19 +247,7 @@
     <Resource Include="image\icon_settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="image\icon_edit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="image\icon_edit1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="image\icon_edit2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="image\icon_add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="image\icon_keyMini.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="image\icon_key.png" />
@@ -270,13 +259,22 @@
     <Resource Include="image\icon_addUser.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="image\icon_deleteUser.png" />
+    <Resource Include="image\reload.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="image\icon_AdmUs.png" />
+    <Resource Include="image\delete.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="image\icon_UseAd.png" />
+    <Resource Include="image\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\personalization.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\expand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\trainMainLogPur.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

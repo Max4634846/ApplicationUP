@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security;
 using System.Security.Principal;
@@ -19,6 +20,7 @@ namespace ApplicationUP.ViewModels
 {
     public class LoginViewModel : ViewModelsBase
     {
+        private int _id;
         private string _userName;
         private string _email;
         private string _password;
@@ -30,8 +32,10 @@ namespace ApplicationUP.ViewModels
         private UserModel CurrentUser;
         private Visibility _stackPanelVisibility = Visibility.Hidden;
 
+
         private IUserRepository userRepository;
         private IUserRepository userEditor;
+        private IUserRepository userDelete;
 
         private string currentAccessLevel;
         public Visibility StackPanelVisibility
@@ -63,6 +67,19 @@ namespace ApplicationUP.ViewModels
                 OnPropertyChanged(nameof(Users));
             }
         }
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
+    
         public string UserName
         {
             get
@@ -127,6 +144,7 @@ namespace ApplicationUP.ViewModels
         
         
         public ViewModelCommand AddCommand { get; private set; }
+        public ViewModelCommand DeleteCommand { get; private set; }
         public ViewModelCommand EditCommand { get; private set; }
         public ViewModelCommand LoginCommand { get; private set; }
         public ViewModelCommand SignUpCommand { get; private set; }
@@ -137,7 +155,9 @@ namespace ApplicationUP.ViewModels
         public LoginViewModel()
         {
             VisibilityEdit();
+            DeleteCommand = new ViewModelCommand(DeleteUser);
             EditCommand = new ViewModelCommand(Edit);
+            userDelete = new UserRepository();
             userEditor = new UserRepository();
             Users = new ObservableCollection<UserModel>(dbLog.GetAllUsers());
             userRepository = new UserRepository();
@@ -146,11 +166,36 @@ namespace ApplicationUP.ViewModels
             AddCommand = new ViewModelCommand(AddUp, CanAdppUp);
             RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverCommand("", ""));
         }
+        private void OpenWindowBasedOnRole(string role)
+        {
+            if (role == "admin")
+            {
+                MainWindow adminWindow = new MainWindow();
+                Application.Current.MainWindow.Close();
+                Application.Current.MainWindow = adminWindow;
+                adminWindow.Show();
+            }
+            else if (role == "user")
+            {
+                UserWin userWindow = new UserWin();
+                Application.Current.MainWindow.Close();
+                Application.Current.MainWindow = userWindow;
+                userWindow.Show();
+            }
+        }
+        private void DeleteUser(object parameter)
+        {
+            userDelete.DeleteUsername(Id);
+            string message = "Пользователь был удален";
+            MessageBox.Show(message);
+            Users = new ObservableCollection<UserModel>(dbLog.GetAllUsers());
+        }
         private void Edit(object parameter)
         {
             userEditor.EditUser(UserName, Password, Email, CurrentAccessLevel);
             string message = "Пользователь был отредактирован.";
             MessageBox.Show(message);
+            Users = new ObservableCollection<UserModel>(dbLog.GetAllUsers());
         }
 
         private void VisibilityEdit()
@@ -180,10 +225,9 @@ namespace ApplicationUP.ViewModels
             {
                 CurrentUser = dbLog.GetByUsername(UserName);
                 Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), null);
-                MainWindow mainWindow = new MainWindow();
-                Application.Current.MainWindow.Close();
-                Application.Current.MainWindow = mainWindow;
-                mainWindow.Show();
+
+                // Открывайте окно в зависимости от роли
+                OpenWindowBasedOnRole(CurrentUser.AccessLevel);
             }
             else
             {
@@ -193,7 +237,7 @@ namespace ApplicationUP.ViewModels
 
         private bool CanSignUp(object parameter)
         {
-            return true;//!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(Email);
+            return true;
         }
         private void SignUp(object parameter)
         {
@@ -208,7 +252,7 @@ namespace ApplicationUP.ViewModels
         }
         private void AddUp(object parameter)
         {
-            userRepository.CreateUser(UserName, Password, Email);
+            userRepository.Add(UserName, Password, Email, CurrentAccessLevel);
             string message = "Admin добавил данные пользователя.";
             MessageBox.Show(message);
         }

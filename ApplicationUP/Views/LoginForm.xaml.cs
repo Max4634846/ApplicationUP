@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ApplicationUP.Views
 {
@@ -22,12 +23,22 @@ namespace ApplicationUP.Views
     /// </summary>
     public partial class LoginForm : Window
     {
+        private DispatcherTimer timer;
         public LoginForm()
         {
             InitializeComponent();
             MainFrame.Content = new LoginPage();
-        }
 
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            currentTimeTextBlock.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
         public bool IsDarkTheme { get; set; }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -43,18 +54,6 @@ namespace ApplicationUP.Views
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
-        }
-
-        private void MainFrame_ContentRendered(object sender, EventArgs e)
-        {
-            //if (MainFrame.CanGoBack)
-            //{
-            //    SinqUp.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    LoginBorder.Visibility = Visibility.Hidden;
-            //}
         }
         private void Maximaze_Click(object sender, RoutedEventArgs e)
         {
@@ -73,11 +72,19 @@ namespace ApplicationUP.Views
             {
                 var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwo.jpg", UriKind.Relative)));
                 this.Background = imageBrush;
+                if (MainFrame.Content is LoginPage loginPage)
+                {
+                    loginPage.ChangeImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\trainMainLogPur.png"));
+                }
             }
             else
             {
                 var imageBrush = new ImageBrush(new BitmapImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\FoneTwoDark.jpg", UriKind.Relative)));
                 this.Background = imageBrush;
+                if (MainFrame.Content is LoginPage loginPage)
+                {
+                    loginPage.ChangeImage(new Uri("D:\\Windows Forms Visual Studio\\ApplicationUP\\ApplicationUP\\image\\trainMainLog.png"));
+                }
             }
         }
     }

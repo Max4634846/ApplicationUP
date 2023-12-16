@@ -14,37 +14,51 @@
     <Window.Background>
         <ImageBrush ImageSource="/image/FoneTwoDark.jpg" />
     </Window.Background>
-    <Grid>
-        <Grid VerticalAlignment="Top">
-            <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top" >
-                <Button Width="25" Height="25" Margin="5" Content="-" Foreground="White" Click="Minimize_Click">
-                    <Button.Background>
-                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                            <GradientStop Color="#5110" Offset="0"/>
-                            <GradientStop Color="#42aaff" Offset="1.5"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
+    <Border>
+        <Grid>
+            <Grid VerticalAlignment="Top">
+                <TextBlock x:Name="currentTimeTextBlock" FontSize="25" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top" >
+                    <Button x:Name="Minimize" Width="25" Height="25" Margin="5" Content="-" Foreground="White" Click="Minimize_Click">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#5420" Offset="0"/>
+                                <GradientStop Color="#42aaff" Offset="0.5"/>
+                                <GradientStop Color="#5420" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
 
-                <Button Width="25" Height="25" Margin="5" Content="X" Foreground="White" Click="Close_Click">
-                    <Button.Background>
-                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                            <GradientStop Color="#5110" Offset="0"/>
-                            <GradientStop Color="#8A16C1" Offset="1.5"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-            </DockPanel>
-        </Grid>
-        <local:SwitchToggle x:Name="BtnToggle"
+                    <Button Width="25" Height="25" Margin="5" Content="^" Foreground="White" Click="Maximaze_Click">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#5420" Offset="0"/>
+                                <GradientStop Color="#DA34AE" Offset="0.5"/>
+                                <GradientStop Color="#5420" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
+                    <Button Width="25" Height="25" Margin="5" Content="X" Foreground="White" Click="Close_Click">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#5420" Offset="0"/>
+                                <GradientStop Color="#8A16C1" Offset="0.5"/>
+                                <GradientStop Color="#5420" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </DockPanel>
+            </Grid>
+            <local:SwitchToggle x:Name="BtnToggle"
                             Margin="5"
                             Width="40" 
                             Height="30"
                             VerticalAlignment="Top" 
                             HorizontalAlignment="Left" 
                             MouseLeftButtonDown="SwitchToggle_MouseLeftButtonDown"/>
-        
-        <Frame NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered" Name="MainFrame"/>
-    </Grid>
 
+            <Frame NavigationUIVisibility="Hidden"  Name="MainFrame"/>
+        </Grid>
+    </Border>
 </Window>

@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Image x:Key="AppLogoDark" Source="/image/FoneTwoDark.png" />
+    <Image x:Key="AppLogoLight" Source="/image/FoneTwo.png" />
+
+    <Style x:Key="AppLogoStyle" TargetType="Image">
+        <Setter Property="Source" Value="{StaticResource AppLogoDark}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=BtnToggle, Path=IsChecked}" Value="True">
+                <Setter Property="Source" Value="{StaticResource AppLogoLight}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
